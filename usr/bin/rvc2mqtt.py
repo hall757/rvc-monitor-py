@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+__requires__ = 'python-can==3.3.4'
+__import__('pkg_resources')
 import argparse,array,can,json,os,queue,re,signal,threading,time
 import ruamel.yaml as yaml
 
@@ -262,10 +263,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", "--broker", default = "localhost", help="MQTT Broker Host")
     parser.add_argument("-d", "--debug", default = 0, type=int, choices=[0, 1, 2], help="debug data")
-    parser.add_argument("-i", "--interface", default = "can0", help="CAN interface to use")
+    parser.add_argument("-i", "--interface", default = "vcan0", help="CAN interface to use")
     parser.add_argument("-m", "--mqtt", default = 0, type=int, choices=[0, 1, 2], help="Send to MQTT, 1=Publish, 2=Retain")
     parser.add_argument("-o", "--output", default = 0, type=int, choices=[0, 1], help="Dump parsed data to stdout")
-    parser.add_argument("-s", "--specfile", default = "/etc/rvc/rvc-spec.yml", help="RVC Spec file")
+    parser.add_argument("-s", "--specfile", default = "/data/etc/rvc/rvc-spec.yml", help="RVC Spec file")
     parser.add_argument("-t", "--topic", default = "RVC", help="MQTT topic prefix")
     parser.add_argument("-p", "--pstrings", action='store_true', help="Send parameterized strings to mqtt")
     args = parser.parse_args()
